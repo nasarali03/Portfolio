@@ -1,6 +1,22 @@
 let header = document.querySelector("header");
 let menu = document.querySelector("#menu-icon");
 let navbar = document.querySelector(".navbar");
+const game = document.getElementById("game");
+const blog = document.getElementById("blog");
+const chatgp = document.getElementById("chagpt");
+
+game.addEventListener("click", function () {
+  window.open("https://github.com/nasarali03/Lugx-Games-Store", "_blank");
+});
+blog.addEventListener("click", function () {
+  window.open("https://github.com/nasarali03/Flask-Blog-Hub", "_blank");
+});
+chatgpt.addEventListener("click", function () {
+  window.open(
+    "https://github.com/nasarali03/Chatgpt-clone-with-voice-input",
+    "_blank"
+  );
+});
 
 var typed = new Typed("#element", {
   strings: ["Web Developer", "Backened Developer"],

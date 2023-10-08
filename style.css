@@ -8,6 +8,8 @@
     --big-font: 3.2rem;
     --medium-font: 1.8rem;
     --p-font: 0.941rem;
+    --tech-color: #dbdbdb;
+    --skill-color: black;
 }
 
 * {
@@ -24,6 +26,8 @@
 body.active {
     --text-color: #fff;
     --bg-color: #0f0c27;
+    --tech-color: #0F172A;
+    --skill-color: white;
 }
 
 body {
@@ -176,7 +180,7 @@ header.shadow {
 
 .btn {
     display: inline-block;
-    background: linear-gradient(to right, darkblue, darkorchid) border-box;
+    background: linear-gradient(to right, rgb(15, 15, 190), rgb(79, 22, 107)) border-box;
     color: #fff;
     padding: 0.7rem 1.3rem;
     border-radius: 0.5rem;
@@ -199,21 +203,29 @@ header.shadow {
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;
+
 }
 
-.project-box {
 
+
+.project-box {
     width: 100%;
+    border-radius: 0.5rem;
+    border-bottom: 2px solid var(--main-color);
+    box-shadow: 0 2px 7px rgb(14 55 54 / 15%);
+    cursor: pointer;
+}
+
+.project-box img,
+h3,
+p {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
-    border-radius: 0.5rem;
-    border-bottom: 2px solid var(--main-color);
-    box-shadow: 0 2px 7px rgb(14 55 54 / 15%);
-    cursor: default;
 }
+
+
 
 .project-box img {
     width: 100%;
@@ -221,7 +233,28 @@ header.shadow {
     border: 4px solid transparent
 }
 
-.projects .btn {
+.project-box .categories {
+
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    margin-left: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.project-box .categories span {
+    color: white;
+    background-color: #0F172A;
+    padding: 4px 6px;
+    border-radius: 50em;
+    font-size: 10px;
+    font-weight: 500;
+
+}
+
+/* .projects .btn {
     color: white;
     padding: 12px;
     margin: 12px 12px;
@@ -229,7 +262,7 @@ header.shadow {
     border: 2px solid transparent;
     background: linear-gradient(to right, darkblue, darkorchid) border-box;
     cursor: pointer;
-}
+} */
 
 .project-box:hover {
     background-color: #02225a;
@@ -239,14 +272,17 @@ header.shadow {
     font-size: 1rem;
     font-weight: 600;
     margin: 0.7rem 0 0.4rem;
+    color: var(--text-color);
 }
 
 .project-box:hover h3 {
     color: #fff;
 }
 
+
+
 .project-box p {
-    /* color: var(--main-color); */
+    color: var(--text-color);
     font-size: var(--p-font);
     font-weight: 500;
     margin-left: 3px;
@@ -280,6 +316,60 @@ header.shadow {
 
 .skills .heading {
     margin-top: 2rem;
+}
+
+.skill-box {
+    padding: 20px;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.5rem;
+    border-bottom: 2px solid var(--main-color);
+    box-shadow: 0 2px 7px rgb(14 55 54 / 15%);
+}
+
+.skill-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 23px;
+    margin-left: 5px;
+    background-color: black;
+    /* background-color: var(--skill-color); */
+}
+
+
+
+.skill-cards {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.25rem;
+    gap: 2.5rem;
+    flex: 1 1 0%;
+    align-items: center;
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, auto)); */
+    justify-content: center;
+    /* gap: 1rem; */
+    margin-top: 2rem;
+
+
+}
+
+
+.first2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.last2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
 
@@ -338,9 +428,6 @@ span {
     width: 85%;
 }
 
-.mongo-bar {
-    width: 65%;
-}
 
 
 
@@ -356,11 +443,15 @@ span {
 }
 
 .about-img img {
-    width: 80%;
-    background: linear-gradient(white, white) padding-box,
-        linear-gradient(to right, darkblue, darkorchid) border-box;
-    border-radius: 250px;
-    border: 4px solid transparent;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: -5px;
+    height: 80%;
+    /* background: linear-gradient(white, white) padding-box,
+        linear-gradient(to right, darkblue, darkorchid) border-box; */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    /* border: 4px solid transparent; */
 }
 
 .about-text p {
@@ -442,6 +533,119 @@ span {
 .services-box:hover a {
     color: #8b8a8f;
 }
+
+.testimonial-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 4rem;
+}
+
+.testimonial-box {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: self-start;
+    /* text-align: center; */
+    border-radius: 0.5rem;
+    border-bottom: 2px solid var(--main-color);
+    box-shadow: 0 2px 7px rgba(3, 10, 10, 0.15);
+    cursor: default;
+}
+
+.testimonial-box img {
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 23px;
+    margin-left: 5px;
+
+}
+
+.testimonial-box span {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.testimonial-box .client {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.testimonial-box:hover {
+    background-color: #02225a;
+}
+
+
+.testimonial-box p {
+    color: var(--text-color);
+    font-size: var(--p-font);
+    font-weight: 500;
+    margin: 10px;
+
+}
+
+.testimonial-box:hover p {
+    color: #c9c7ce;
+}
+
+.testimonial-box:hover span {
+    color: #c9c7ce;
+}
+
+
+.contact-form {
+    display: grid;
+    place-items: center;
+    margin-top: 2rem;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+}
+
+form input,
+textarea {
+    padding: 15px;
+    border-radius: 0.5rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: hsla(260, 100%, 44%, 0.1);
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+form input::placeholder,
+textarea::placeholder {
+    color: var(--text-color);
+}
+
+form textarea {
+    resize: none;
+    height: 200px;
+}
+
+.contact-button {
+    width: 160px;
+    cursor: pointer;
+    background: linear-gradient(to right, rgb(15, 15, 190), rgb(79, 22, 107)) border-box;
+    color: #fff;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 35%;
+}
+
+/* .contact-button:hover {
+    background: var(--hover);
+} */
 
 .footer {
     display: grid;

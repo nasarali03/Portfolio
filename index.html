@@ -7,7 +7,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/android-chrome-192x192.png">
-    <link rel="manifest" href="/icons/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <title>Nasar Ali</title>
@@ -49,7 +48,17 @@
                 <div>and I am a Passionate</div>
                 <span id="element">Hello</span>
                 <br>
-                <!-- <a href="#contact" class="btn">Download CV</a> -->
+                <a href="#contact" class="btn">Hire Me</a>
+                <a href="#contact" class="btn">Download
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" height="1em" width="1em">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </a>
+
+
             </div>
         </section>
 
@@ -59,37 +68,60 @@
                 <span class="text-gray">What I am done so far</span>
             </div>
             <div class="project-content">
-                <div class="project-box">
-                    <img src="/images/lugx.PNG" class="card-img-top" alt="...">
-                    <h3>Games Store</h3>
-                    <p>"LUGX is a dynamic gaming showcase created with Flask powering the backend, MongoDB handling the
-                        database, and a stylish Bootstrap template for the frontend. It's a perfect blend of technology
-                        to present our gaming projects."</p>
-                    <a href="https://github.com/nasarali03/Lugx-Games-Store" target="_blank"><button class="btn">Visit
-                            Github</button></a>
 
+                <div class="project-box" id="game">
+                    <img src="/images/lugx.jpg" class="card-img-top" alt="...">
+                    <h3>Games Store</h3>
+                    <p>"LUGX is a dynamic gaming showcase created with Flask as backend, MongoDB as
+                        the
+                        database, and a stylish Bootstrap template for the frontend. It's a perfect blend of
+                        technology
+                        to present our projects."</p>
+                    <div class="categories">
+                        <span>Flask</span>
+                        <span>Bootstrap</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <!-- <a href="https://github.com/nasarali03/Lugx-Games-Store" target="_blank"><button
+                                class="btn">Visit
+                                Github</button></a> -->
                 </div>
-                <div class="project-box">
-                    <img src="/images/blog_hub.PNG" class="card-img-top" alt="...">
+
+
+                <div class="project-box" id="blog">
+                    <img src="/images/blog_hub.jpg" class="card-img-top" alt="...">
                     <h3>Bloging Website</h3>
-                    <p>"Discover my blogging website project, skillfully developed with Flask on the backend, SQL for
+                    <p>"Discover my blogging website project, skillfully developed with Flask on the backend, SQL
+                        for
                         data management, and enhanced by a Bootstrap frontend template. Experience the website's
                         structure and potential."</p>
-                    <a href="https://github.com/nasarali03/Flask-Blog-Hub" target="_blank"><button class="btn">Visit
-                            Github</button></a>
-
+                    <!-- <a href="https://github.com/nasarali03/Flask-Blog-Hub" target="_blank"><button class="btn">Visit
+                            Github</button></a> -->
+                    <div class="categories">
+                        <span>Flask</span>
+                        <span>Bootstrap</span>
+                        <span>Sql </span>
+                    </div>
                 </div>
-                <div class="project-box">
-                    <img src="/images/chatgpt.PNG" class="card-img-top" alt="">
+
+                <div class="project-box" id="chatgpt">
+                    <img src="/images/chatgpt.jpg" class="card-img-top" alt="">
                     <h3>Chatgpt Clone with voice input</h3>
                     <p>"Explore my ChatGPT clone project, featuring a blend of HTML, CSS, and JavaScript for the
-                        frontend, powered by Flask on the backend. It leverages the OpenAI API for intelligent responses
+                        frontend, powered by Flask on the backend. It leverages the OpenAI API for intelligent
+                        responses
                         and MongoDB for data storage."</p>
-                    <a href="https://github.com/nasarali03/Chatgpt-clone-with-voice-input" target="_blank"><button
+                    <!-- <a href="https://github.com/nasarali03/Chatgpt-clone-with-voice-input" target="_blank"><button
                             class="btn">Visit
-                            Github</button></a>
+                            Github</button></a> -->
+                    <div class="categories">
+                        <span>Flask</span>
+                        <span>HTML/CSS/JS</span>
+                        <span>MongoDB</span>
 
+                    </div>
                 </div>
+
 
 
             </div>
@@ -136,11 +168,37 @@
                         <div class="light-bar"></div>
                         <div class="percent-bar flask-bar"></div>
                     </div>
-                    <div class="bars-box">
-                        <h3>Mongodb</h3>
-                        <span>65%</span>
-                        <div class="light-bar"></div>
-                        <div class="percent-bar mongo-bar"></div>
+
+                </div>
+
+                <div class="skill-cards">
+                    <div class="first2">
+                        <div class="skill-box">
+                            <div class="skill-image">
+                                <img src="/images/nodejs.jpg">
+                            </div>
+                            <span>Node Js</span>
+                        </div>
+                        <div class="skill-box">
+                            <div class="skill-image">
+                                <img src="/images/mongo.jpg">
+                            </div>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="last2">
+                        <div class="skill-box">
+                            <div class="skill-image">
+                                <img src="/images/express js.jpg">
+                            </div>
+                            <span>Express Js</span>
+                        </div>
+                        <div class="skill-box">
+                            <div class="skill-image">
+                                <img src="/images/coding.png">
+                            </div>
+                            <span>Python</span>
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +214,7 @@
 
             <div class="about-container">
                 <div class="about-img">
-                    <img src="/images/Nasar Ali.jpg" alt="Nasar Ali">
+                    <img src="/images/about me.jpg" alt="Nasar Ali">
                 </div>
                 <div class="about-text">
                     <p>Hello, I'm Nasar Ali, a computer science student at NUTECH University and a passionate web
@@ -165,7 +223,7 @@
                         I love building things on the web. From crafting code that makes websites come alive to solving
                         puzzles in the digital world, I find joy in every line of code I write.
                         <br>
-                        By day, I work at <a href="https://webdevotix.online/" target="_blank"> Web Devotix</a>, a
+                        By day, I work at Web Devotix, a
                         dynamic web development company where we bring
                         ideas to life on
                         the digital canvas. It's here that I'm honing my skills, collaborating with talented minds, and
@@ -225,6 +283,60 @@
             </div>
         </section>
 
+        <section class="testimonial" id="testimonial">
+            <div class="heading">
+                <h2>Testimonial</h2>
+                <span>What our clients say about us</span>
+            </div>
+            <div class="testimonial-content">
+
+                <div class="testimonial-box">
+                    <div class="client">
+                        <img src="https://beundefined.tech/wp-content/uploads/2020/06/Mask-Group-4-150x150.jpg">
+                        <span>John Doe</span>
+                    </div>
+                    <p>"I had an amazing experience working with Nasar Ali. His expertise in web development is truly
+                        commendable. He turned our vision into reality!</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="client">
+                        <img src="https://beundefined.tech/wp-content/uploads/2020/06/Mask-Group-4-150x150.jpg">
+                        <span>John Doe</span>
+                    </div>
+                    <p>"I had an amazing experience working with Nasar Ali. His expertise in web development is truly
+                        commendable. He turned our vision into reality!</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="client">
+                        <img src="https://beundefined.tech/wp-content/uploads/2020/06/Mask-Group-4-150x150.jpg">
+                        <span>John Doe</span>
+                    </div>
+                    <p>"I had an amazing experience working with Nasar Ali. His expertise in web development is truly
+                        commendable. He turned our vision into reality!</p>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="heading">
+                <h2>Contact</h2>
+                <span>Connect With Us</span>
+            </div>
+            <div class="contact-form">
+                <form action="" id="myform" method="post">
+                    <input type="text" placeholder="Your Name" name="name" id="name">
+                    <input type="email" name="email" id="email" placeholder="Your Email">
+                    <textarea name="text" id="text" cols="30" rows="10" placeholder="Write Message Here..."></textarea>
+                    <input type="submit" id="send" class="contact-button">
+                </form>
+            </div>
+            <div id="success-message" style="display: none;text-align: center;">
+                Email sent successfully!
+            </div>
+        </section>
+
         <div class="footer">
             <h2>Let's Talk</h2>
             <div class="footer-social">
@@ -244,6 +356,11 @@
     </main>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="script.js"></script>
+    <!-- <script src=" https://smtpjs.com/v3/smtp.js"></script> -->
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script src="contact.js"></script>
 
 </body>
 
