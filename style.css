@@ -330,6 +330,15 @@ p {
     box-shadow: 0 2px 7px rgb(14 55 54 / 15%);
 }
 
+.skill-box:hover {
+    background-color: #02225a;
+}
+
+.skill-box:hover span {
+    color: #fff;
+}
+
+
 .skill-image {
     width: 60px;
     height: 60px;
