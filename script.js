@@ -19,7 +19,7 @@ chatgpt.addEventListener("click", function () {
 });
 
 var typed = new Typed("#element", {
-  strings: ["Web Developer", "Backened Developer"],
+  strings: ["Web Developer", "Backened Developer", "Python Developer"],
   typeSpeed: 50,
 });
 
