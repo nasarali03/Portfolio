@@ -82,7 +82,7 @@ darkmode.onclick = () => {
 
 // Apply the theme on page load and then load the content
 document.addEventListener("DOMContentLoaded", function () {
-  const currentTheme = getThemePreference() || "dark"; // Default to 'light' if no preference is found
+  const currentTheme = getThemePreference() || "light";
   applyTheme(currentTheme);
   // Now load your content here
   document.body.style.display = "block";
