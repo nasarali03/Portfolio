@@ -35,14 +35,55 @@ window.onscroll = () => {
 };
 
 // Dark Mode / light mode
-let darkmode = document.querySelector("#darkmode");
+// let darkmode = document.querySelector("#darkmode");
 
-darkmode.onclick = () => {
-  if (darkmode.classList.contains("bx-moon")) {
-    darkmode.classList.replace("bx-moon", "bx-sun");
+// darkmode.onclick = () => {
+//   if (darkmode.classList.contains("bx-sun")) {
+//     darkmode.classList.replace("bx-sun", "bx-moon");
+//     document.body.classList.add("active");
+//   } else {
+//     darkmode.classList.replace("bx-moon", "bx-sun");
+//     document.body.classList.remove("active");
+//   }
+// };
+
+// Function to set the theme preference in local storage
+function setThemePreference(theme) {
+  localStorage.setItem("theme", theme);
+}
+
+// Function to retrieve the theme preference from local storage
+function getThemePreference() {
+  return localStorage.getItem("theme");
+}
+
+// Function to apply the theme
+function applyTheme(theme) {
+  if (theme === "dark") {
     document.body.classList.add("active");
-  } else {
     darkmode.classList.replace("bx-sun", "bx-moon");
+  } else {
     document.body.classList.remove("active");
+    darkmode.classList.replace("bx-moon", "bx-sun");
   }
+}
+
+// Event handler for theme toggle
+darkmode.onclick = () => {
+  let currentTheme = getThemePreference();
+  if (currentTheme === "dark") {
+    currentTheme = "light";
+  } else {
+    currentTheme = "dark";
+  }
+  setThemePreference(currentTheme);
+  applyTheme(currentTheme);
 };
+
+// Apply the theme on page load and then load the content
+document.addEventListener("DOMContentLoaded", function () {
+  const currentTheme = getThemePreference() || "dark"; // Default to 'light' if no preference is found
+  applyTheme(currentTheme);
+  // Now load your content here
+  document.body.style.display = "block";
+});

@@ -2,14 +2,15 @@
 
 :root {
     --main-color: #033a80;
-    --bg-color: #fff;
-    --text-color: #0f0c27;
+    --bg-color: #0f0c27;
+    --text-color: #fff;
     --hover: hsl(260, 100%, 51%);
     --big-font: 3.2rem;
     --medium-font: 1.8rem;
     --p-font: 0.941rem;
-    --tech-color: #dbdbdb;
-    --skill-color: black;
+    --tech-color: #0F172A;
+    --skill-color: white;
+
 }
 
 * {
@@ -24,16 +25,36 @@
 }
 
 body.active {
-    --text-color: #fff;
-    --bg-color: #0f0c27;
-    --tech-color: #0F172A;
-    --skill-color: white;
+    --text-color: #0f0c27;
+    --bg-color: #fff;
+    --tech-color: #dbdbdb;
+    --skill-color: black;
 }
 
 body {
     background: var(--bg-color);
     color: var(--text-color);
 }
+
+/* @media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: #fff;
+        --text-color: #0f0c27;
+        --tech-color: #dbdbdb;
+        --skill-color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #fff;
+        --bg-color: #0f0c27;
+        --tech-color: #0F172A;
+        --skill-color: white;
+    }
+} */
+
+
 
 section {
     padding: 30px 10%;
