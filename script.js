@@ -3,7 +3,7 @@ let menu = document.querySelector("#menu-icon");
 let navbar = document.querySelector(".navbar");
 const game = document.getElementById("game");
 const blog = document.getElementById("blog");
-const chatgp = document.getElementById("chagpt");
+const chatgpt = document.getElementById("chatgpt");
 
 game.addEventListener("click", function () {
   window.open("https://github.com/nasarali03/Lugx-Games-Store", "_blank");
@@ -30,22 +30,9 @@ window.addEventListener("scroll", () => {
 menu.onclick = () => {
   navbar.classList.toggle("active");
 };
-window.onscroll = () => {
+navbar.addEventListener("click", () => {
   navbar.classList.remove("active");
-};
-
-// Dark Mode / light mode
-// let darkmode = document.querySelector("#darkmode");
-
-// darkmode.onclick = () => {
-//   if (darkmode.classList.contains("bx-sun")) {
-//     darkmode.classList.replace("bx-sun", "bx-moon");
-//     document.body.classList.add("active");
-//   } else {
-//     darkmode.classList.replace("bx-moon", "bx-sun");
-//     document.body.classList.remove("active");
-//   }
-// };
+});
 
 // Function to set the theme preference in local storage
 function setThemePreference(theme) {
