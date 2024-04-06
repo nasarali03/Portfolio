@@ -30,9 +30,11 @@ window.addEventListener("scroll", () => {
 menu.onclick = () => {
   navbar.classList.toggle("active");
 };
-document.addEventListener("touchstart", function () {
+window.addEventListener("touchmove", function (event) {
   navbar.classList.remove("active");
+  event.stopPropagation();
 });
+
 navbar.addEventListener("click", () => {
   navbar.classList.remove("active");
 });
