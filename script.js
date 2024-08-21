@@ -19,8 +19,8 @@ chatgpt.addEventListener("click", function () {
 });
 
 var typed = new Typed("#element", {
-  strings: ["Web Developer", "Backened Developer", "Python Developer"],
-  typeSpeed: 50,
+  strings: ["Web Developer", "Python Developer"],
+  typeSpeed: 55,
 });
 
 window.addEventListener("scroll", () => {
