@@ -1,25 +1,25 @@
 let header = document.querySelector("header");
 let menu = document.querySelector("#menu-icon");
 let navbar = document.querySelector(".navbar");
-const game = document.getElementById("game");
-const blog = document.getElementById("blog");
-const chatgpt = document.getElementById("chatgpt");
+const darkmode = document.getElementById("darkmode");
+const tenderasaan = document.getElementById("tenderasaan");
+const weather = document.getElementById("weather");
+const workconnect = document.getElementById("workconnect");
 
-game.addEventListener("click", function () {
-  window.open("https://github.com/nasarali03/Lugx-Games-Store", "_blank");
+tenderasaan.addEventListener("click", function () {
+  window.open("https://www.tenderasaan.com/", "_blank");
 });
-blog.addEventListener("click", function () {
-  window.open("https://github.com/nasarali03/Flask-Blog-Hub", "_blank");
+
+weather.addEventListener("click", function () {
+  window.open("https://github.com/nasarali03/Weather-Charts", "_blank");
 });
-chatgpt.addEventListener("click", function () {
-  window.open(
-    "https://github.com/nasarali03/Chatgpt-clone-with-voice-input",
-    "_blank"
-  );
+
+workconnect.addEventListener("click", function () {
+  window.open("https://github.com/nasarali03/work-connect", "_blank");
 });
 
 var typed = new Typed("#element", {
-  strings: ["Web Developer", "Python Developer"],
+  strings: ["Backend Developer", "AI Engineer"],
   typeSpeed: 55,
 });
 
