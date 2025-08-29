@@ -19,7 +19,7 @@ workconnect.addEventListener("click", function () {
 });
 
 var typed = new Typed("#element", {
-  strings: ["Backend Developer", "AI Engineer"],
+  strings: ["Backend Developer", "Agentic AI Developer"],
   typeSpeed: 55,
 });
 
