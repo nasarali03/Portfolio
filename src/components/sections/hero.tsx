@@ -8,7 +8,7 @@ export function Hero({ content }: { content: HeroContent }) {
   const { name, title, intro, resumeUrl, profileUrl, profileHint } = content;
   return (
     <section id="hero" className="bg-secondary">
-      <div className="container grid items-center gap-8 md:grid-cols-2 lg:gap-12 py-16 md:py-24 lg:py-32">
+      <div className="container grid items-center gap-8 md:grid-cols-2 lg:gap-12 py-8 md:py-12 lg:py-16">
         <div className="space-y-4 text-center md:space-y-6 md:text-left">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline">
             {name}
@@ -25,7 +25,7 @@ export function Hero({ content }: { content: HeroContent }) {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/contact">
+              <Link href="#contact">
                 <Send className="mr-2 h-4 w-4" />
                 Get in Touch
               </Link>
