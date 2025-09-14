@@ -12,7 +12,7 @@ const mockPortfolioData: PortfolioData = {
     intro:
       'I build robust, scalable backend systems and intelligent AI-powered applications.',
     resumeUrl: '/resume.pdf',
-    profileUrl: '/nasar-ali-profile.jpg',
+    profileUrl: 'https://picsum.photos/seed/profile/400/400',
     profileHint: 'professional headshot',
   },
   about: {
@@ -28,7 +28,7 @@ const mockPortfolioData: PortfolioData = {
       { id: '8', name: 'PostgreSQL', category: 'Tool' },
       { id: '9', name: 'n8n', category: 'Tool' },
     ],
-    profileUrl: '/nasar-ali-profile.jpg',
+    profileUrl: 'https://picsum.photos/seed/profile/400/400',
     profileHint: 'professional developer',
   },
   projects: [
@@ -71,6 +71,18 @@ const mockPortfolioData: PortfolioData = {
         githubUrl: '#',
         liveUrl: '#',
         order: 3,
+    },
+    {
+        id: 'p4',
+        title: 'AI-Powered Content Generator',
+        summary: 'A web application that uses generative AI to create blog posts, marketing copy, and other written content based on user prompts.',
+        description: 'Leveraging the power of large language models via Genkit, this tool provides a simple interface for users to generate high-quality content. The backend is built with Firebase Functions, and the frontend is a responsive React application.',
+        imageUrl: 'https://picsum.photos/seed/proj4/600/400',
+        imageHint: 'artificial intelligence',
+        techStack: ['React', 'Firebase', 'Genkit', 'Node.js'],
+        githubUrl: '#',
+        liveUrl: '#',
+        order: 4
     }
   ],
   experience: [
@@ -103,6 +115,21 @@ const mockPortfolioData: PortfolioData = {
         'Improved website performance by optimizing assets and implementing code-splitting, reducing load times by 40%.',
       ],
       order: 2,
+    },
+    {
+      id: 'e3',
+      company: 'Creative Agency',
+      logoUrl: 'https://picsum.photos/seed/logo3/100/100',
+      logoHint: 'creative logo',
+      title: 'Junior Web Developer',
+      startDate: 'May 2016',
+      endDate: 'May 2017',
+      description: [
+        'Assisted in the development of marketing websites and landing pages for clients using HTML, CSS, and JavaScript.',
+        'Gained experience with version control (Git) and agile development methodologies.',
+        'Contributed to a project that won a regional award for web design and user experience.',
+       ],
+       order: 3
     }
   ],
   education: [
@@ -131,6 +158,13 @@ const mockPortfolioData: PortfolioData = {
       provider: 'Certified Professionals',
       url: '#',
       order: 2,
+    },
+    {
+      id: 'c3',
+      name: 'Firebase for Web',
+      provider: 'Official Firebase Training',
+      url: '#',
+      order: 3
     }
   ],
 };
