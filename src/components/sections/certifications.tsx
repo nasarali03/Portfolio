@@ -1,3 +1,5 @@
+'use client';
+
 import type { Certification } from '@/lib/types';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';

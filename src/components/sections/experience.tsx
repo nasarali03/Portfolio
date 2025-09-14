@@ -1,3 +1,5 @@
+'use client';
+
 import type { Experience as ExperienceType } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';

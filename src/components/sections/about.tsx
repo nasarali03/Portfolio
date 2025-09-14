@@ -1,3 +1,5 @@
+'use client';
+
 import type { AboutContent } from '@/lib/types';
 import Image from 'next/image';
 

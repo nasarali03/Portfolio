@@ -1,3 +1,5 @@
+'use client';
+
 import type { Education as EducationType } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { GraduationCap } from 'lucide-react';
