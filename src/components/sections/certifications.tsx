@@ -4,10 +4,17 @@ import type { Certification } from '@/lib/types';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';
 import { Award, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function Certifications({ content }: { content: Certification[] }) {
   return (
-    <section id="certifications">
+    <motion.section 
+      id="certifications"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container space-y-12">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Certifications</h2>
@@ -32,6 +39,6 @@ export function Certifications({ content }: { content: Certification[] }) {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -14,10 +14,10 @@ export function Header() {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/#about', label: 'About' },
+    { href: '/#projects', label: 'Projects' },
+    { href: '/#experience', label: 'Experience' },
+    { href: '/#contact', label: 'Contact' },
   ];
 
   const navContent = (
@@ -29,7 +29,6 @@ export function Header() {
           onClick={() => setIsSheetOpen(false)}
           className={cn(
               "transition-colors hover:text-primary text-lg md:text-sm font-medium",
-              pathname === link.href ? "text-primary" : ""
             )}
         >
           {link.label}

@@ -4,10 +4,17 @@ import type { Experience as ExperienceType } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Briefcase } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function Experience({ content }: { content: ExperienceType[] }) {
   return (
-    <section id="experience">
+    <motion.section 
+      id="experience"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container space-y-12">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Work Experience</h2>
@@ -51,6 +58,6 @@ export function Experience({ content }: { content: ExperienceType[] }) {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

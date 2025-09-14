@@ -1,4 +1,10 @@
 import { Hero } from '@/components/sections/hero';
+import { About } from '@/components/sections/about';
+import { Projects } from '@/components/sections/projects';
+import { Experience } from '@/components/sections/experience';
+import { Education } from '@/components/sections/education';
+import { Certifications } from '@/components/sections/certifications';
+import { Contact } from '@/components/sections/contact';
 import { getPortfolioData } from '@/lib/data';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -11,6 +17,12 @@ export default async function PortfolioPage() {
       <Header />
       <main className="flex-1">
         <Hero content={data.hero} />
+        <About content={data.about} />
+        <Projects content={data.projects} />
+        <Experience content={data.experience} />
+        <Education content={data.education} />
+        <Certifications content={data.certifications} />
+        <Contact />
       </main>
       <Footer />
     </div>

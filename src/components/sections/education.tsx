@@ -3,10 +3,18 @@
 import type { Education as EducationType } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { GraduationCap } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function Education({ content }: { content: EducationType[] }) {
   return (
-    <section id="education" className="bg-secondary">
+    <motion.section 
+      id="education" 
+      className="bg-secondary"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container space-y-12">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Education</h2>
@@ -34,6 +42,6 @@ export function Education({ content }: { content: EducationType[] }) {
             ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

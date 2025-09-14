@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { Send } from "lucide-react"
+import { motion } from 'framer-motion';
 
 export function Contact() {
     const { toast } = useToast();
@@ -24,7 +25,14 @@ export function Contact() {
     };
 
   return (
-    <section id="contact" className="bg-secondary">
+    <motion.section 
+      id="contact" 
+      className="bg-secondary"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container space-y-12">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Contact Me</h2>
@@ -46,6 +54,6 @@ export function Contact() {
           </form>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

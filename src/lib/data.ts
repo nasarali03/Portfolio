@@ -59,6 +59,18 @@ const mockPortfolioData: PortfolioData = {
       liveUrl: '#',
       order: 2,
     },
+    {
+        id: 'p3',
+        title: 'Project Management Tool',
+        summary: 'A collaborative project management tool designed to help teams organize tasks, track progress, and meet deadlines, built with React and Firebase.',
+        description: 'This tool provides a Kanban-style board where users can create tasks, assign them to team members, set due dates, and move them through different stages of a workflow. It includes features like real-time updates, comments, and file attachments, all powered by Firebase Firestore and Storage.',
+        imageUrl: 'https://picsum.photos/seed/proj3/600/400',
+        imageHint: 'modern workspace',
+        techStack: ['React', 'Firebase', 'Tailwind CSS', ' Zustand'],
+        githubUrl: '#',
+        liveUrl: '#',
+        order: 3,
+    }
   ],
   experience: [
     {
@@ -76,6 +88,21 @@ const mockPortfolioData: PortfolioData = {
       ],
       order: 1,
     },
+     {
+      id: 'e2',
+      company: 'Innovate LLC',
+      logoUrl: 'https://picsum.photos/seed/logo2/100/100',
+      logoHint: 'tech logo',
+      title: 'Frontend Developer',
+      startDate: 'Jun 2017',
+      endDate: 'Dec 2019',
+      description: [
+        'Developed and maintained responsive user interfaces for various client websites using React and Redux.',
+        'Collaborated with designers and backend developers to deliver high-quality products on schedule.',
+        'Improved website performance by optimizing assets and implementing code-splitting, reducing load times by 40%.',
+      ],
+      order: 2,
+    }
   ],
   education: [
     {
@@ -97,6 +124,13 @@ const mockPortfolioData: PortfolioData = {
       url: '#',
       order: 1,
     },
+    {
+      id: 'c2',
+      name: 'Certified JavaScript Developer',
+      provider: 'Certified Professionals',
+      url: '#',
+      order: 2,
+    }
   ],
 };
 
@@ -125,23 +159,28 @@ async function getSingletonDoc<T>(collectionName: string, docId: string): Promis
 export async function getPortfolioData(): Promise<PortfolioData> {
   // In a real app, you might fetch a single document that holds references
   // or contains all this data. For simplicity, we fetch each collection.
-  const [
-    hero,
-    about,
-    projects,
-    experience,
-    education,
-    certifications
-  ] = await Promise.all([
-    getSingletonDoc<HeroContent>('singletons', 'hero'),
-    getSingletonDoc<AboutContent>('singletons', 'about'),
-    getDataFromCollection<Project>('projects'),
-    getDataFromCollection<Experience>('experience'),
-    getDataFromCollection<Education>('education'),
-    getDataFromCollection<Certification>('certifications'),
-  ]);
+  try {
+    const [
+      hero,
+      about,
+      projects,
+      experience,
+      education,
+      certifications
+    ] = await Promise.all([
+      getSingletonDoc<HeroContent>('singletons', 'hero'),
+      getSingletonDoc<AboutContent>('singletons', 'about'),
+      getDataFromCollection<Project>('projects'),
+      getDataFromCollection<Experience>('experience'),
+      getDataFromCollection<Education>('education'),
+      getDataFromCollection<Certification>('certifications'),
+    ]);
 
-  return { hero, about, projects, experience, education, certifications };
+    return { hero, about, projects, experience, education, certifications };
+  } catch(error) {
+    console.warn("Using mock data because of a Firebase error. Have you set up your project and security rules correctly?");
+    return mockPortfolioData;
+  }
 }
 
 
