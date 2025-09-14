@@ -12,7 +12,7 @@ const mockPortfolioData: PortfolioData = {
     intro:
       'I build robust, scalable backend systems and intelligent AI-powered applications.',
     resumeUrl: '/resume.pdf',
-    profileUrl: 'https://picsum.photos/seed/profile/400/400',
+    profileUrl: '/nasar-ali-profile.jpg',
     profileHint: 'professional headshot',
   },
   about: {
@@ -28,7 +28,7 @@ const mockPortfolioData: PortfolioData = {
       { id: '8', name: 'PostgreSQL', category: 'Tool' },
       { id: '9', name: 'n8n', category: 'Tool' },
     ],
-    profileUrl: 'https://picsum.photos/seed/profile2/400/400',
+    profileUrl: '/nasar-ali-profile.jpg',
     profileHint: 'professional developer',
   },
   projects: [
