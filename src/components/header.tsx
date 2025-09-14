@@ -6,32 +6,34 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setIsSheetOpen(false);
-  };
+  const pathname = usePathname();
 
   const navLinks = [
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' },
+    { href: '/about', label: 'About' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/experience', label: 'Experience' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   const navContent = (
     <>
       {navLinks.map((link) => (
-        <button
-          key={link.id}
-          onClick={() => scrollTo(link.id)}
-          className="transition-colors hover:text-primary text-lg md:text-sm font-medium"
+        <Link
+          key={link.href}
+          href={link.href}
+          onClick={() => setIsSheetOpen(false)}
+          className={cn(
+              "transition-colors hover:text-primary text-lg md:text-sm font-medium",
+              pathname === link.href ? "text-primary" : ""
+            )}
         >
           {link.label}
-        </button>
+        </Link>
       ))}
     </>
   );
