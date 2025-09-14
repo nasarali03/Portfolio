@@ -5,10 +5,17 @@ import { Button } from '@/components/ui/button';
 import type { Project } from '@/lib/types';
 import { Github, Link as LinkIcon } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { motion } from 'framer-motion';
+
+const MotionCard = motion(Card);
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="flex h-full flex-col overflow-hidden rounded-2xl shadow-lg transition-transform hover:scale-105">
+    <MotionCard 
+      className="flex h-full flex-col overflow-hidden rounded-2xl shadow-lg"
+      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 300 }}
+    >
       <CardHeader className="p-0">
         <div className="relative h-48 w-full">
           <Image
@@ -49,6 +56,6 @@ export function ProjectCard({ project }: { project: Project }) {
           </Button>
         )}
       </CardFooter>
-    </Card>
+    </MotionCard>
   );
 }

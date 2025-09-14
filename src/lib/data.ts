@@ -1,9 +1,13 @@
-import type { PortfolioData } from './types';
+import { db } from './firebase';
+import { collection, getDocs, doc, getDoc, setDoc, deleteDoc, orderBy, query, limit } from 'firebase/firestore';
+import type { PortfolioData, Project, Experience, Education, Certification, Skill, HeroContent, AboutContent } from './types';
 
-// This file mocks a database connection.
-let portfolioData: PortfolioData = {
+// This file now fetches data from Firestore.
+// The mock data is kept for seeding/reference purposes.
+
+const mockPortfolioData: PortfolioData = {
   hero: {
-    name: 'Alex Doe',
+    name: 'Nasar Ali',
     title: 'Senior Frontend Developer',
     intro:
       'I build beautiful, responsive, and performant web applications with a focus on user experience.',
@@ -12,7 +16,7 @@ let portfolioData: PortfolioData = {
     profileHint: 'professional headshot',
   },
   about: {
-    bio: `Hello! I'm Alex, a passionate frontend developer with over 8 years of experience creating dynamic and user-friendly web interfaces. My expertise lies in the React ecosystem, particularly with Next.js and TypeScript. I thrive on solving complex problems and turning ideas into high-quality, scalable code. When I'm not coding, you can find me exploring new hiking trails or contributing to open-source projects.`,
+    bio: `Hello! I'm Nasar, a passionate frontend developer with over 8 years of experience creating dynamic and user-friendly web interfaces. My expertise lies in the React ecosystem, particularly with Next.js and TypeScript. I thrive on solving complex problems and turning ideas into high-quality, scalable code. When I'm not coding, you can find me exploring new hiking trails or contributing to open-source projects.`,
     skills: [
       { id: '1', name: 'TypeScript', category: 'Language' },
       { id: '2', name: 'React', category: 'Framework/Library' },
@@ -55,19 +59,6 @@ let portfolioData: PortfolioData = {
       liveUrl: '#',
       order: 2,
     },
-    {
-      id: 'p3',
-      title: 'Portfolio CMS Dashboard',
-      summary:
-        'A secure admin dashboard to dynamically manage portfolio content. Features full CRUD operations, image uploads to Firebase Storage, and role-based access control.',
-      description:
-        'The admin dashboard for this very portfolio! Built with Next.js App Router and Server Actions, it provides a CMS-like experience for managing all portfolio content. Users can create, update, and delete projects, experiences, and more. Image uploads are handled efficiently via Firebase Storage. This project demonstrates proficiency in building secure, data-driven applications with modern Next.js features.',
-      imageUrl: 'https://picsum.photos/seed/proj3/600/400',
-      imageHint: 'modern workspace',
-      techStack: ['Next.js', 'Server Actions', 'Firebase', 'shadcn/ui'],
-      githubUrl: '#',
-      order: 3,
-    },
   ],
   experience: [
     {
@@ -84,21 +75,6 @@ let portfolioData: PortfolioData = {
         'Mentored junior developers and conducted code reviews to maintain high code quality standards.',
       ],
       order: 1,
-    },
-    {
-      id: 'e2',
-      company: 'Web Innovators LLC',
-      logoUrl: 'https://picsum.photos/seed/logo2/100/100',
-      logoHint: 'tech logo',
-      title: 'Frontend Developer',
-      startDate: 'Jun 2017',
-      endDate: 'Dec 2019',
-      description: [
-        'Developed and maintained responsive user interfaces for various client websites using React and Redux.',
-        'Collaborated with designers and backend developers to deliver pixel-perfect and functional web applications.',
-        'Improved website performance by optimizing assets and implementing code-splitting, reducing load times by 40%.',
-      ],
-      order: 2,
     },
   ],
   education: [
@@ -121,55 +97,70 @@ let portfolioData: PortfolioData = {
       url: '#',
       order: 1,
     },
-    {
-      id: 'c2',
-      name: 'Next.js Conf Certificate',
-      provider: 'Vercel',
-      url: '#',
-      order: 2,
-    },
   ],
 };
 
-// Simulate API latency
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export async function getPortfolioData() {
-  await delay(100); 
-  return portfolioData;
+async function getDataFromCollection<T>(collectionName: string): Promise<T[]> {
+  const q = query(collection(db, collectionName), orderBy('order'));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
 }
 
-export async function getProjects() {
-  await delay(100);
-  return [...portfolioData.projects].sort((a, b) => a.order - b.order);
-}
-
-export async function getProjectById(id: string) {
-    await delay(100);
-    return portfolioData.projects.find(p => p.id === id) || null;
-}
-
-export async function upsertProject(projectData: Omit<PortfolioData['projects'][0], 'id'> & { id?: string }) {
-  await delay(200);
-  if (projectData.id) {
-    // Update
-    const index = portfolioData.projects.findIndex(p => p.id === projectData.id);
-    if (index !== -1) {
-      portfolioData.projects[index] = { ...portfolioData.projects[index], ...projectData };
-      return portfolioData.projects[index];
+async function getSingletonDoc<T>(collectionName: string, docId: string): Promise<T> {
+    const docRef = doc(db, collectionName, docId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        return docSnap.data() as T;
     }
-  } else {
-    // Create
-    const newProject = { ...projectData, id: `p${Date.now()}` };
-    portfolioData.projects.push(newProject);
-    return newProject;
-  }
-  return null;
+    // Return mock data if doc doesn't exist in firestore
+    if (collectionName === 'singletons') {
+        if(docId === 'hero') return mockPortfolioData.hero as T;
+        if(docId === 'about') return mockPortfolioData.about as T;
+    }
+    throw new Error(`Document ${docId} not found in ${collectionName}`);
+}
+
+
+export async function getPortfolioData(): Promise<PortfolioData> {
+  // In a real app, you might fetch a single document that holds references
+  // or contains all this data. For simplicity, we fetch each collection.
+  const [
+    hero,
+    about,
+    projects,
+    experience,
+    education,
+    certifications
+  ] = await Promise.all([
+    getSingletonDoc<HeroContent>('singletons', 'hero'),
+    getSingletonDoc<AboutContent>('singletons', 'about'),
+    getDataFromCollection<Project>('projects'),
+    getDataFromCollection<Experience>('experience'),
+    getDataFromCollection<Education>('education'),
+    getDataFromCollection<Certification>('certifications'),
+  ]);
+
+  return { hero, about, projects, experience, education, certifications };
+}
+
+
+export async function getProjects(): Promise<Project[]> {
+  return getDataFromCollection<Project>('projects');
+}
+
+export async function getProjectById(id: string): Promise<Project | null> {
+    const docRef = doc(db, 'projects', id);
+    const docSnap = await getDoc(docRef);
+    return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } as Project : null;
+}
+
+export async function upsertProject(projectData: Omit<Project, 'id'> & { id?: string }) {
+    const { id, ...data } = projectData;
+    const docId = id || doc(collection(db, 'projects')).id;
+    await setDoc(doc(db, 'projects', docId), data, { merge: true });
 }
 
 export async function deleteProject(id: string) {
-    await delay(200);
-    const initialLength = portfolioData.projects.length;
-    portfolioData.projects = portfolioData.projects.filter(p => p.id !== id);
-    return portfolioData.projects.length < initialLength;
+    await deleteDoc(doc(db, 'projects', id));
 }

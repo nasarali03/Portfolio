@@ -8,7 +8,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: 'Firebase FolioFlow',
+  title: "Nasar Ali's Portfolio",
   description: 'A dynamic, resume-based portfolio website with a secure admin dashboard.',
 };
 
