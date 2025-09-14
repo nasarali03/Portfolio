@@ -1,3 +1,41 @@
+
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "profile-picture",
+      "description": "A professional headshot for the hero and about sections.",
+      "imageUrl": "https://picsum.photos/seed/profile/400/400",
+      "imageHint": "professional headshot"
+    },
+    {
+      "id": "project-1",
+      "description": "Placeholder image for the first project card.",
+      "imageUrl": "https://picsum.photos/seed/proj1/600/400",
+      "imageHint": "tech abstract"
+    },
+    {
+      "id": "project-2",
+      "description": "Placeholder image for the second project card.",
+      "imageUrl": "https://picsum.photos/seed/proj2/600/400",
+      "imageHint": "code screen"
+    },
+    {
+      "id": "project-3",
+      "description": "Placeholder image for the third project card.",
+      "imageUrl": "https://picsum.photos/seed/proj3/600/400",
+      "imageHint": "modern workspace"
+    },
+    {
+      "id": "company-logo-1",
+      "description": "Logo for the first company in the experience section.",
+      "imageUrl": "https://picsum.photos/seed/logo1/100/100",
+      "imageHint": "minimalist logo"
+    },
+    {
+      "id": "company-logo-2",
+      "description": "Logo for the second company in the experience section.",
+      "imageUrl": "https://picsum.photos/seed/logo2/100/100",
+      "imageHint": "tech logo"
+    }
+  ]
 }
