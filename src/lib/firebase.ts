@@ -3,16 +3,12 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { firebaseConfig } from "./firebase-config";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBHupN4OPYTnFxsYnlu-gDqc2uWBd542-Y",
-  authDomain: "studio-3597294011-e2531.firebaseapp.com",
-  projectId: "studio-3597294011-e2531",
-  storageBucket: "studio-3597294011-e2531.firebasestorage.app",
-  messagingSenderId: "88247050202",
-  appId: "1:88247050202:web:56e1984b11e6ceda7aeae3"
-};
+// Validate that required environment variables are present
+if (!firebaseConfig.apiKey || !firebaseConfig.authDomain || !firebaseConfig.projectId) {
+  throw new Error("Firebase configuration is missing required environment variables. Please check your .env file.");
+}
 
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
