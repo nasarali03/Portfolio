@@ -15,7 +15,7 @@ export default async function PortfolioPage() {
   return (
     <div className="flex min-h-dvh flex-col">
       <Header />
-      <main className="flex-1">
+      <main>
         <Hero content={data.hero} />
         <About content={data.about} />
         <Projects content={data.projects} />

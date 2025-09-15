@@ -238,3 +238,47 @@ export async function upsertProject(projectData: Omit<Project, 'id'> & { id?: st
 export async function deleteProject(id: string) {
     await deleteDoc(doc(db, 'projects', id));
 }
+
+// Experience functions
+export async function upsertExperience(experienceData: Omit<Experience, 'id'> & { id?: string }) {
+    const { id, ...data } = experienceData;
+    const docId = id || doc(collection(db, 'experience')).id;
+    await setDoc(doc(db, 'experience', docId), data, { merge: true });
+}
+
+export async function deleteExperience(id: string) {
+    await deleteDoc(doc(db, 'experience', id));
+}
+
+// Education functions
+export async function upsertEducation(educationData: Omit<Education, 'id'> & { id?: string }) {
+    const { id, ...data } = educationData;
+    const docId = id || doc(collection(db, 'education')).id;
+    await setDoc(doc(db, 'education', docId), data, { merge: true });
+}
+
+export async function deleteEducation(id: string) {
+    await deleteDoc(doc(db, 'education', id));
+}
+
+// Certification functions
+export async function upsertCertification(certificationData: Omit<Certification, 'id'> & { id?: string }) {
+    const { id, ...data } = certificationData;
+    const docId = id || doc(collection(db, 'certifications')).id;
+    await setDoc(doc(db, 'certifications', docId), data, { merge: true });
+}
+
+export async function deleteCertification(id: string) {
+    await deleteDoc(doc(db, 'certifications', id));
+}
+
+// Skills functions
+export async function upsertSkill(skillData: Omit<Skill, 'id'> & { id?: string }) {
+    const { id, ...data } = skillData;
+    const docId = id || doc(collection(db, 'skills')).id;
+    await setDoc(doc(db, 'skills', docId), data, { merge: true });
+}
+
+export async function deleteSkill(id: string) {
+    await deleteDoc(doc(db, 'skills', id));
+}

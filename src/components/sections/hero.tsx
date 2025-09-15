@@ -6,9 +6,14 @@ import type { HeroContent } from '@/lib/types';
 
 export function Hero({ content }: { content: HeroContent }) {
   const { name, title, intro, resumeUrl, profileUrl, profileHint } = content;
+
+  // Use the ali1.png image for the hero section
+  const localProfileSrc = '/ali1.png';
+  const imageSrc = localProfileSrc;
+
   return (
-    <section id="hero" className="bg-secondary">
-      <div className="container grid items-center gap-8 md:grid-cols-2 lg:gap-12 py-8 md:py-12 lg:py-16">
+    <section id="hero" className="bg-secondary !py-4 md:!py-6 lg:!py-8">
+      <div className="container grid items-center gap-6 md:grid-cols-2 lg:gap-8">
         <div className="space-y-4 text-center md:space-y-6 md:text-left">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline">
             {name}
@@ -32,16 +37,19 @@ export function Hero({ content }: { content: HeroContent }) {
             </Button>
           </div>
         </div>
-        <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-          <Image
-            src={profileUrl}
-            alt={name}
-            width={400}
-            height={400}
-            priority
-            className="rounded-full object-cover shadow-lg border-4 border-background"
-            data-ai-hint={profileHint}
-          />
+        <div className="relative mx-auto w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
+          {/* wrapper keeps rounded overflow while allowing us to scale/zoom the image */}
+          <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg border-4 border-background">
+            <Image
+              src={imageSrc}
+              alt={name}
+              width={1000}
+              height={1000}
+              priority
+              className="object-cover object-center transform scale-125"
+              data-ai-hint={profileHint}
+            />
+          </div>
         </div>
       </div>
     </section>

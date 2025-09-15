@@ -11,7 +11,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { generateSummaryAction, upsertProjectAction } from './actions'
 import type { Project } from '@/lib/types'
-import { Loader2, Sparkles, Trash } from 'lucide-react'
+import { Loader2, Sparkles, Trash, Upload, X, Image as ImageIcon } from 'lucide-react'
+import Image from 'next/image'
 
 const projectSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
@@ -21,6 +22,7 @@ const projectSchema = z.object({
   githubUrl: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   liveUrl: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   order: z.coerce.number().min(0),
+  imageFile: z.instanceof(File).optional(),
 })
 
 type ProjectFormData = z.infer<typeof projectSchema>
@@ -34,6 +36,7 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
   const { toast } = useToast()
   const [isPending, startTransition] = useTransition()
   const [isGenerating, setIsGenerating] = useState(false)
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const {
     register,
@@ -41,6 +44,7 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
     control,
     setValue,
     getValues,
+    watch,
     formState: { errors },
   } = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
@@ -54,6 +58,8 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
       order: project?.order || 0,
     },
   })
+
+  const watchedImageFile = watch('imageFile')
 
   const onSubmit = (data: ProjectFormData) => {
     startTransition(async () => {
@@ -76,6 +82,23 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
         })
       }
     })
+  }
+
+  // Handle image file selection
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setValue('imageFile', file)
+      // Create preview URL
+      const previewUrl = URL.createObjectURL(file)
+      setPreviewImage(previewUrl)
+    }
+  }
+
+  // Remove selected image
+  const removeImage = () => {
+    setValue('imageFile', undefined)
+    setPreviewImage(null)
   }
   
   const handleGenerateSummary = async () => {
@@ -121,6 +144,59 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
           <Label htmlFor="order">Display Order</Label>
           <Input id="order" type="number" {...register('order')} />
           {errors.order && <p className="text-destructive text-sm mt-1">{errors.order.message}</p>}
+        </div>
+      </div>
+
+      {/* Image Upload Section */}
+      <div className="space-y-2">
+        <Label>Project Image</Label>
+        <div className="space-y-4">
+          {/* Image Preview */}
+          {(previewImage || project?.imageUrl) && (
+            <div className="relative w-full max-w-md">
+              <div className="relative aspect-video rounded-lg overflow-hidden border">
+                <Image
+                  src={previewImage || project?.imageUrl || ''}
+                  alt="Project preview"
+                  fill
+                  className="object-cover"
+                />
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="sm"
+                  className="absolute top-2 right-2"
+                  onClick={removeImage}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* File Input */}
+          <div className="flex items-center gap-4">
+            <input
+              type="file"
+              id="imageFile"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            <Label
+              htmlFor="imageFile"
+              className="flex items-center gap-2 px-4 py-2 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+            >
+              <Upload className="h-4 w-4" />
+              {watchedImageFile ? 'Change Image' : 'Upload Image'}
+            </Label>
+            {watchedImageFile && (
+              <span className="text-sm text-muted-foreground">
+                {watchedImageFile.name}
+              </span>
+            )}
+          </div>
+          {errors.imageFile && <p className="text-destructive text-sm mt-1">{errors.imageFile.message}</p>}
         </div>
       </div>
       <div>
