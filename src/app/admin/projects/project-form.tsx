@@ -66,8 +66,14 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
       try {
         await upsertProjectAction({
           id: project?.id,
-          ...data,
+          title: data.title,
+          description: data.description,
+          summary: data.summary,
           techStack: data.techStack.split(',').map(s => s.trim()),
+          githubUrl: data.githubUrl || undefined,
+          liveUrl: data.liveUrl || undefined,
+          order: data.order,
+          imageFile: data.imageFile,
         })
         toast({
           title: 'Success!',
@@ -75,9 +81,11 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
         })
         onFinished?.()
       } catch (error) {
+        console.error('Error updating project:', error)
+        const errorMessage = error instanceof Error ? error.message : 'Something went wrong.'
         toast({
           title: 'Error',
-          description: 'Something went wrong.',
+          description: errorMessage,
           variant: 'destructive',
         })
       }
@@ -88,6 +96,27 @@ export function ProjectForm({ project, onFinished }: ProjectFormProps) {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+      // Check file size (1MB limit for Firestore)
+      const maxSize = 1024 * 1024; // 1MB in bytes
+      if (file.size > maxSize) {
+        toast({
+          title: 'File too large',
+          description: 'Please select an image smaller than 1MB.',
+          variant: 'destructive',
+        })
+        return
+      }
+
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: 'Invalid file type',
+          description: 'Please select an image file.',
+          variant: 'destructive',
+        })
+        return
+      }
+
       setValue('imageFile', file)
       // Create preview URL
       const previewUrl = URL.createObjectURL(file)

@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 9002",
+    "dev:fast": "next dev --turbopack -p 9002 --experimental-build-mode=compile",
     "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "setup:env": "node scripts/setup-env.js"
+    "typecheck": "tsc --noEmit --incremental",
+    "setup:env": "node scripts/setup-env.js",
+    "check:images": "node scripts/clear-placeholder-images.js",
+    "cleanup:images": "node scripts/cleanup-placeholder-images.js"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.14.1",

@@ -12,7 +12,7 @@ const mockPortfolioData: PortfolioData = {
     intro:
       'I build robust, scalable backend systems and intelligent AI-powered applications.',
     resumeUrl: '/resume.pdf',
-    profileUrl: 'https://picsum.photos/seed/profile/400/400',
+    profileUrl: '/ali2.png', // Use local image as fallback
     profileHint: 'professional headshot',
   },
   about: {
@@ -28,7 +28,7 @@ const mockPortfolioData: PortfolioData = {
       { id: '8', name: 'PostgreSQL', category: 'Tool' },
       { id: '9', name: 'n8n', category: 'Tool' },
     ],
-    profileUrl: 'https://picsum.photos/seed/profile/400/400',
+    profileUrl: '/ali2.png', // Use local image as fallback
     profileHint: 'professional developer',
   },
   projects: [
@@ -89,8 +89,8 @@ const mockPortfolioData: PortfolioData = {
     {
       id: 'e1',
       company: 'Tech Solutions Inc.',
-      logoUrl: 'https://picsum.photos/seed/logo1/100/100',
-      logoHint: 'minimalist logo',
+      logoUrl: '', // Will be filled by uploaded image or placeholder
+      logoHint: 'company logo',
       title: 'Senior Frontend Developer',
       startDate: 'Jan 2020',
       endDate: 'Present',
@@ -104,8 +104,8 @@ const mockPortfolioData: PortfolioData = {
      {
       id: 'e2',
       company: 'Innovate LLC',
-      logoUrl: 'https://picsum.photos/seed/logo2/100/100',
-      logoHint: 'tech logo',
+      logoUrl: '', // Will be filled by uploaded image or placeholder
+      logoHint: 'company logo',
       title: 'Frontend Developer',
       startDate: 'Jun 2017',
       endDate: 'Dec 2019',
@@ -119,8 +119,8 @@ const mockPortfolioData: PortfolioData = {
     {
       id: 'e3',
       company: 'Creative Agency',
-      logoUrl: 'https://picsum.photos/seed/logo3/100/100',
-      logoHint: 'creative logo',
+      logoUrl: '', // Will be filled by uploaded image or placeholder
+      logoHint: 'company logo',
       title: 'Junior Web Developer',
       startDate: 'May 2016',
       endDate: 'May 2017',
@@ -176,7 +176,7 @@ async function getDataFromCollection<T>(collectionName: string): Promise<T[]> {
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
 }
 
-async function getSingletonDoc<T>(collectionName: string, docId: string): Promise<T> {
+export async function getSingletonDoc<T>(collectionName: string, docId: string): Promise<T> {
     const docRef = doc(db, collectionName, docId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -244,6 +244,12 @@ export async function upsertExperience(experienceData: Omit<Experience, 'id'> & 
     const { id, ...data } = experienceData;
     const docId = id || doc(collection(db, 'experience')).id;
     await setDoc(doc(db, 'experience', docId), data, { merge: true });
+}
+
+export async function getExperienceById(id: string): Promise<Experience | null> {
+    const docRef = doc(db, 'experience', id);
+    const docSnap = await getDoc(docRef);
+    return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } as Experience : null;
 }
 
 export async function deleteExperience(id: string) {

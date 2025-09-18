@@ -7,6 +7,9 @@ import { motion } from 'framer-motion';
 export function About({ content }: { content: AboutContent }) {
   const { bio, skills, profileUrl, profileHint } = content;
 
+  // Use the profileUrl from the database, fallback to local image if not available
+  const imageSrc = profileUrl || '/ali2.png';
+
   return (
     <motion.section 
       id="about"
@@ -25,7 +28,7 @@ export function About({ content }: { content: AboutContent }) {
         <div className="grid gap-8 md:grid-cols-3 md:gap-12">
             <div className='relative h-64 w-64 md:h-auto md:w-full mx-auto'>
                  <Image 
-                    src={profileUrl}
+                    src={imageSrc}
                     alt="About me profile picture"
                     fill
                     className="rounded-2xl object-cover"

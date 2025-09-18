@@ -83,6 +83,27 @@ export function ExperienceForm({ experience, onFinished }: ExperienceFormProps) 
   const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+      // Check file size (3MB limit)
+      const maxSize = 3 * 1024 * 1024; // 3MB in bytes
+      if (file.size > maxSize) {
+        toast({
+          title: 'File too large',
+          description: 'Please select an image smaller than 3MB.',
+          variant: 'destructive',
+        })
+        return
+      }
+
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: 'Invalid file type',
+          description: 'Please select an image file.',
+          variant: 'destructive',
+        })
+        return
+      }
+
       setValue('logoFile', file)
       // Create preview URL
       const previewUrl = URL.createObjectURL(file)

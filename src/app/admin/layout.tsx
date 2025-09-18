@@ -20,7 +20,7 @@ export default function AdminLayout({
         <SidebarHeader>
           <div className="flex items-center gap-2 p-2">
             <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-semibold text-lg">FolioFlow</span>
+            <span className="font-semibold text-lg">Nasar Ali</span>
           </div>
         </SidebarHeader>
         <SidebarContent>

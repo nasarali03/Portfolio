@@ -16,10 +16,14 @@ import {
   Contact,
   Settings,
   Lightbulb,
+  User,
+  Home,
 } from 'lucide-react';
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin/hero', label: 'Hero', icon: Home },
+  { href: '/admin/about', label: 'About', icon: User },
   { href: '/admin/projects', label: 'Projects', icon: FileText },
   { href: '/admin/experience', label: 'Experience', icon: Briefcase },
   { href: '/admin/education', label: 'Education', icon: GraduationCap },

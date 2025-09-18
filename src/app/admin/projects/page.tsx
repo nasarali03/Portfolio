@@ -1,6 +1,4 @@
 import { getProjects } from "@/lib/data"
-import { ProjectForm } from "./project-form"
-import { ProjectActions } from "./project-actions"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -28,17 +26,23 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { 
   PlusCircle, 
-  Edit, 
-  Trash2, 
   ExternalLink, 
   Github,
   Eye,
-  Calendar,
-  Tag
 } from "lucide-react"
 import { Project } from "@/lib/types"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
+
+// Lazy load heavy components
+const ProjectForm = dynamic(() => import("./project-form").then(mod => ({ default: mod.ProjectForm })), {
+  loading: () => <div className="animate-pulse h-96 bg-muted rounded-lg" />
+})
+
+const ProjectActions = dynamic(() => import("./project-actions").then(mod => ({ default: mod.ProjectActions })), {
+  loading: () => <div className="animate-pulse h-8 w-20 bg-muted rounded" />
+})
 
 export default async function ProjectsPage() {
   const projects = await getProjects()

@@ -37,7 +37,13 @@ export function Experience({ content }: { content: ExperienceType[] }) {
                 <div className="w-full md:w-[calc(50%-3rem)]">
                     <Card className="rounded-2xl shadow-md">
                         <CardHeader className='flex-row items-start gap-4 space-y-0'>
-                            <Image src={item.logoUrl} alt={`${item.company} logo`} width={48} height={48} className='rounded-md border' data-ai-hint={item.logoHint} />
+                            {item.logoUrl ? (
+                                <Image src={item.logoUrl} alt={`${item.company} logo`} width={48} height={48} className='rounded-md border' data-ai-hint={item.logoHint} />
+                            ) : (
+                                <div className="w-12 h-12 bg-muted rounded-md border flex items-center justify-center">
+                                    <Briefcase className="h-6 w-6 text-muted-foreground" />
+                                </div>
+                            )}
                             <div>
                                 <CardTitle>{item.title}</CardTitle>
                                 <p className="font-semibold text-primary">{item.company}</p>
