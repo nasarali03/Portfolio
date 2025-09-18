@@ -9,16 +9,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
-import { updateHeroContent, getHeroContent } from './actions'
+import { updateHeroContent } from './actions'
 import type { HeroContent } from '@/lib/types'
 import { Loader2, Upload, X } from 'lucide-react'
 import Image from 'next/image'
 
 const heroSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  title: z.string().min(2, 'Title must be at least 2 characters'),
+  title: z.string().min(3, 'Title must be at least 3 characters'),
   intro: z.string().min(10, 'Intro must be at least 10 characters'),
-  resumeUrl: z.string().url('Please enter a valid URL'),
+  resumeUrl: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   profileFile: z.instanceof(File).optional(),
 })
 
@@ -59,7 +59,7 @@ export function HeroForm({ heroContent, onFinished }: HeroFormProps) {
           name: data.name,
           title: data.title,
           intro: data.intro,
-          resumeUrl: data.resumeUrl,
+          resumeUrl: data.resumeUrl || undefined,
           profileFile: data.profileFile,
         })
         toast({
@@ -126,12 +126,12 @@ export function HeroForm({ heroContent, onFinished }: HeroFormProps) {
           {/* Image Preview */}
           {(previewImage || heroContent?.profileUrl) && (
             <div className="relative w-full max-w-md">
-              <div className="relative aspect-square rounded-full overflow-hidden border-4 border-background shadow-lg">
+              <div className="relative aspect-square rounded-lg overflow-hidden border">
                 <Image
                   src={previewImage || heroContent?.profileUrl || ''}
                   alt="Profile preview"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
                 />
                 <Button
                   type="button"
@@ -172,21 +172,21 @@ export function HeroForm({ heroContent, onFinished }: HeroFormProps) {
         </div>
       </div>
 
-      {/* Basic Information */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <Label htmlFor="name">Full Name</Label>
-          <Input id="name" {...register('name')} placeholder="Nasar Ali" />
-          {errors.name && <p className="text-destructive text-sm mt-1">{errors.name.message}</p>}
-        </div>
-        <div>
-          <Label htmlFor="title">Professional Title</Label>
-          <Input id="title" {...register('title')} placeholder="Backend and AI Developer" />
-          {errors.title && <p className="text-destructive text-sm mt-1">{errors.title.message}</p>}
-        </div>
+      {/* Name */}
+      <div>
+        <Label htmlFor="name">Full Name</Label>
+        <Input id="name" {...register('name')} placeholder="Nasar Ali" />
+        {errors.name && <p className="text-destructive text-sm mt-1">{errors.name.message}</p>}
       </div>
 
-      {/* Introduction */}
+      {/* Title */}
+      <div>
+        <Label htmlFor="title">Professional Title</Label>
+        <Input id="title" {...register('title')} placeholder="Backend and AI Developer" />
+        {errors.title && <p className="text-destructive text-sm mt-1">{errors.title.message}</p>}
+      </div>
+
+      {/* Intro */}
       <div>
         <Label htmlFor="intro">Introduction</Label>
         <Textarea 

@@ -91,6 +91,18 @@ export default function SettingsPage() {
               <Label htmlFor="location">Location</Label>
               <Input id="location" placeholder="City, Country" />
             </div>
+            <div className="space-y-2">
+              <Label>Hero Profile Image</Label>
+              <p className="text-sm text-muted-foreground">
+                Upload a profile image for your hero section
+              </p>
+              <Button variant="outline" asChild>
+                <Link href="/admin/hero">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Manage Hero Image
+                </Link>
+              </Button>
+            </div>
           </CardContent>
         </Card>
 

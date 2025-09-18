@@ -15,8 +15,6 @@ const nextConfig: NextConfig = {
         },
       },
     },
-    // Enable parallel compilation
-    parallelServerCompiles: true,
     // Optimize bundle analysis
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
@@ -95,8 +93,7 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Enable SWC minification for faster builds
-  swcMinify: true,
+  // SWC minification is enabled by default in Next.js 13+
   
   // Optimize for development
   ...(process.env.NODE_ENV === 'development' && {

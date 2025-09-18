@@ -24,7 +24,7 @@ export default function AdminLayout({
           </div>
         </SidebarHeader>
         <SidebarContent>
-            <SidebarNav />
+            <SidebarNav />  
         </SidebarContent>
       </Sidebar>
       <SidebarInset>

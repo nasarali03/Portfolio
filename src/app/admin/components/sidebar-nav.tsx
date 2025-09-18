@@ -13,11 +13,11 @@ import {
   Briefcase,
   GraduationCap,
   Award,
+  Home,
   Contact,
   Settings,
   Lightbulb,
   User,
-  Home,
 } from 'lucide-react';
 
 const navItems = [

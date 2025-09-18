@@ -1,7 +1,5 @@
 import { getHeroContent } from './actions'
 import { HeroForm } from './hero-form'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { User } from 'lucide-react'
 
 export default async function HeroPage() {
   const heroContent = await getHeroContent()
@@ -19,20 +17,7 @@ export default async function HeroPage() {
       </div>
 
       {/* Hero Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <User className="h-5 w-5" />
-            Hero Content
-          </CardTitle>
-          <CardDescription>
-            Update your name, title, introduction, and profile image that appears at the top of your portfolio.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <HeroForm heroContent={heroContent} />
-        </CardContent>
-      </Card>
+      <HeroForm heroContent={heroContent} />
     </div>
   )
 }
