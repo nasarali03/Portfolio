@@ -26,10 +26,33 @@ import {
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
+import { useAuth } from '@/contexts/auth-context';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 export function AdminHeader() {
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
   const [notifications] = useState(3); // Mock notification count
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast({
+        title: "Success",
+        description: "Logged out successfully!",
+      });
+      router.push('/login');
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to log out",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 sm:px-6">
@@ -109,17 +132,21 @@ export function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="/ali1.png" alt="Admin" />
-                <AvatarFallback>NA</AvatarFallback>
+                <AvatarImage src={user?.photoURL || "/ali1.png"} alt={user?.displayName || "Admin"} />
+                <AvatarFallback>
+                  {user?.displayName?.charAt(0) || user?.email?.charAt(0) || "NA"}
+                </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">Nasar Ali</p>
+                <p className="text-sm font-medium leading-none">
+                  {user?.displayName || "Nasar Ali"}
+                </p>
                 <p className="text-xs leading-none text-muted-foreground">
-                  nasar@example.com
+                  {user?.email || "nasar@example.com"}
                 </p>
               </div>
             </DropdownMenuLabel>
@@ -153,11 +180,9 @@ export function AdminHeader() {
               <span>Help & Support</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/login">
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </Link>
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
