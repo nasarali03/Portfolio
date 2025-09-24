@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '3mb', // Increase body size limit to 3MB for image uploads
     },
     // Enable faster compilation
-    turbo: {
+    turbopack: {
       rules: {
         '*.svg': {
           loaders: ['@svgr/webpack'],
@@ -44,42 +44,6 @@ const nextConfig: NextConfig = {
         tls: false,
       };
     }
-    
-    // Handle global variables for SSR
-    config.resolve.alias = {
-      ...config.resolve.alias,
-    };
-    
-    // Add global polyfills for browser APIs
-    config.plugins = config.plugins || [];
-    config.plugins.push(
-      new config.webpack.DefinePlugin({
-        'typeof window': JSON.stringify('object'),
-        'typeof self': JSON.stringify('object'),
-        'self': 'undefined',
-      })
-    );
-    
-    // Optimize bundle splitting
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
-    };
     
     return config;
   },

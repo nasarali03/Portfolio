@@ -3,7 +3,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
-import { AuthProviderWrapper } from '@/components/auth-provider-wrapper';
+import { AuthProvider } from '@/contexts/auth-context';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -27,10 +27,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProviderWrapper>
+          <AuthProvider>
             {children}
             <Toaster />
-          </AuthProviderWrapper>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
