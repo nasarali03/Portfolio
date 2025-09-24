@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e9e9e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f8f8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="url(#bg)"/>
+  
+  <!-- Modern geometric "N" -->
+  <path d="M8 8h4v16h-4V8z" fill="#454545"/>
+  <path d="M8 8l8 16h4L12 8h-4z" fill="#707070"/>
+  
+  <!-- Tech accent dots -->
+  <circle cx="22" cy="10" r="1.5" fill="#707070" opacity="0.6"/>
+  <circle cx="25" cy="13" r="1" fill="#454545" opacity="0.4"/>
+  <circle cx="22" cy="22" r="1" fill="#707070" opacity="0.3"/>
+</svg>

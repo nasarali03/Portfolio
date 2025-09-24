@@ -5,11 +5,26 @@ import { Code2, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 export function Header() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const router = useRouter();
+
+  // Hidden keyboard shortcut: Ctrl+Shift+A to access admin
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+        event.preventDefault();
+        router.push('/admin');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [router]);
 
   const navLinks = [
     { href: '#about', label: 'About' },
@@ -58,9 +73,6 @@ export function Header() {
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-2">
-          <Button variant="ghost" asChild>
-            <Link href="/admin">Admin</Link>
-          </Button>
           <ThemeToggle />
           <div className="md:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
