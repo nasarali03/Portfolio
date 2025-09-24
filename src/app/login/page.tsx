@@ -18,14 +18,15 @@ import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 
 export default function LoginPage() {
-  const { signInWithGoogle, signInWithEmail, loading } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleEmailSignIn = async (e: React.FormEvent) => {
+  const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
       toast({
@@ -38,16 +39,38 @@ export default function LoginPage() {
 
     setIsLoading(true);
     try {
-      await signInWithEmail(email, password);
-      toast({
-        title: "Success",
-        description: "Signed in successfully!",
-      });
+      if (isSignUp) {
+        await signUpWithEmail(email, password);
+        toast({
+          title: "Success",
+          description: "Account created successfully!",
+        });
+      } else {
+        await signInWithEmail(email, password);
+        toast({
+          title: "Success",
+          description: "Signed in successfully!",
+        });
+      }
       router.push('/admin');
     } catch (error: any) {
+      let errorMessage = "Authentication failed";
+      
+      if (error.code === 'auth/invalid-credential') {
+        errorMessage = "Invalid email or password. Try creating an account instead.";
+      } else if (error.code === 'auth/user-not-found') {
+        errorMessage = "No account found with this email. Try creating an account.";
+      } else if (error.code === 'auth/email-already-in-use') {
+        errorMessage = "An account with this email already exists. Try signing in.";
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage = "Password should be at least 6 characters.";
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = "Please enter a valid email address.";
+      }
+      
       toast({
         title: "Error",
-        description: error.message || "Failed to sign in",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -82,13 +105,18 @@ export default function LoginPage() {
         <Link href="/" className="mb-4 inline-block">
              <Code2 className="h-8 w-8 text-primary" />
         </Link>
-        <CardTitle className="text-2xl font-headline">Admin Login</CardTitle>
+        <CardTitle className="text-2xl font-headline">
+          {isSignUp ? "Create Admin Account" : "Admin Login"}
+        </CardTitle>
         <CardDescription>
-          Enter your credentials to access the dashboard.
+          {isSignUp 
+            ? "Create a new account to access the dashboard."
+            : "Enter your credentials to access the dashboard."
+          }
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleEmailSignIn} className="grid gap-4">
+        <form onSubmit={handleEmailAuth} className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -113,7 +141,19 @@ export default function LoginPage() {
             />
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign in"}
+            {isLoading 
+              ? (isSignUp ? "Creating account..." : "Signing in...") 
+              : (isSignUp ? "Create Account" : "Sign in")
+            }
+          </Button>
+          <Button 
+            type="button"
+            variant="ghost" 
+            className="w-full" 
+            onClick={() => setIsSignUp(!isSignUp)}
+            disabled={isLoading}
+          >
+            {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
           </Button>
           <Button 
             type="button"

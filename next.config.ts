@@ -35,6 +35,31 @@ const nextConfig: NextConfig = {
       };
     }
     
+    // Fix for 'self is not defined' error
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
+    // Handle global variables for SSR
+    config.resolve.alias = {
+      ...config.resolve.alias,
+    };
+    
+    // Add global polyfills for browser APIs
+    config.plugins = config.plugins || [];
+    config.plugins.push(
+      new config.webpack.DefinePlugin({
+        'typeof window': JSON.stringify('object'),
+        'typeof self': JSON.stringify('object'),
+        'self': 'undefined',
+      })
+    );
+    
     // Optimize bundle splitting
     config.optimization = {
       ...config.optimization,
